@@ -1,0 +1,25 @@
+<form [formGroup]="form">
+  <mat-card>
+  <mat-form-field appearance="fill">
+    <mat-label>Command</mat-label>
+    <mat-select required formControlName="commandControl">
+      <mat-option *ngFor="let command of commands" [value]="command">{{command.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="mb-3">
+    <mat-label class="form-label">Money</mat-label>
+    <input required formControlName="moneyControl" matInput class="form-control">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Currency</mat-label>
+    <mat-select required formControlName="currencyControl">
+      <mat-option *ngFor="let curr of currency" [value]="curr">{{curr.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-card-actions align="end">
+    <button  [disabled]="!form.valid"
+             (click)="handleFormSubmit(form.value)"
+             class="signup__btn-create btn btn--type-02">Make bet</button>
+  </mat-card-actions>
+  </mat-card>
+</form>

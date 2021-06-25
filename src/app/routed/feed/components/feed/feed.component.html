@@ -1,0 +1,74 @@
+<div class="container feed">
+  <div class="nav">
+    <div class="nav__categories js-dropdown">
+      <div class="nav__select">
+        <div class="nav__menu js-dropdown">Ближайшие</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="posts">
+    <div *ngIf="title">
+      <div style="font-size: 22px; background-color: rgba(249, 188, 100, 0.7)" class="posts__head">
+        <div class="title">
+          {{ title }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isEmptyResponse; else noContent">
+      <div class="posts__body">
+        <div
+          *ngFor="
+            let event of events
+              | paginate
+                : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          "
+        >
+          <div>
+            <div class="posts__item" [ngClass]="{ bgGray: i % 2 === 0 }">
+              <div class="posts__section-left">
+                <div class="posts__topic">
+                  <div class="posts__content">
+                    <img style="margin-right: 35px" src="https://bhavinionline.com/wp-content/uploads/2014/01/Cricket-Puzzle-120x100.jpg" alt="">
+                    <a>
+                      <h3>{{ event.name }}</h3>
+                    </a>
+                    <a *ngIf="this.user.authenticated" routerLink="placeBet/{{event.id}}" mat-flat-button color="primary" style="background-color: #f9bc64; margin-left: 35px">Make a bet</a>
+                  </div>
+                </div>
+
+                <div class="posts__section-right">
+                  <div class="col-md-10 posts__users js-dropdown">Home: {{ event.home }}</div>
+
+                  <div class="col-md-10 posts__users js-dropdown">Away: {{ event.away }}</div>
+
+                  <div class="col-md-6 posts__replies">{{ event.date | date: 'dd.MM.yyyy HH:mm' }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md controls">
+        <pagination-controls
+          previousLabel="Предыдущая"
+          nextLabel="Следующая"
+          responsive="true"
+          (pageChange)="handlePageChange($event)"
+        ></pagination-controls>
+      </div>
+    </div>
+
+    <ng-template #noContent>
+      <div class="label">К сожалению, лента сейчас пуста. Возвращайтесь позже!</div>
+    </ng-template>
+  </div>
+</div>

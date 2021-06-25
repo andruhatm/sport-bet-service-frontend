@@ -1,0 +1,86 @@
+<head>
+  <title>Sign Up</title>
+</head>
+
+<div class="signup">
+
+  <header class="signup__header">
+    <div class="container">
+      <div class="signup__header-content">
+        <p>Уже есть аккаунт?</p>
+        <a [routerLink]="['/auth', 'login']" style="margin-bottom:10px" class="btn">Войти!</a>
+      </div>
+      <div class="signup__header-content">
+        <button [routerLink]="['/feed']" style="margin-bottom:10px" type="button" class="btn-success">Главная</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="signup__main">
+    <img class="signup__bg" src="assets/images/signup-bg.png" alt="bg" />
+    <div class="container">
+      <div class="signup__container">
+        <div class="signup__logo">
+          <a  style="font-family: 'Comic Sans MS'"><img src="../../../../../fonts/icons/main/smart-event-logo.png" alt="logo" />Sport Bets</a>
+        </div>
+        <div class="signup__head">
+          <h2>Создайте Свой Аккаунт</h2>
+          <p>
+            Зарегистрировавшись, вы сможете просматривать ленту предстоящих событий и делать ставки!)
+          </p>
+        </div>
+        <mat-card class="signup__form">
+          <form [formGroup]="form">
+            <mat-error *ngIf="errorEmail"> Такой email уже занят, попробуйте другой</mat-error>
+            <mat-error *ngIf="errorUsername"> Такой username уже занят, попробуйте другой</mat-error>
+            <mat-card-content class="content">
+
+              <mat-form-field appearance="standard">
+                <mat-label>Почта</mat-label>
+                <input class="form-control" matInput type="email" formControlName="email" name="email" maxlength="50" required />
+                <mat-error *ngIf="form.get('email')?.errors?.pattern">
+                  Введите действительную почту
+                </mat-error>
+
+                <mat-error *ngIf="form.get('email')?.hasError('whitespace')">
+                  <span>Обязательное поле</span>
+                </mat-error>
+
+              </mat-form-field>
+
+              <mat-form-field appearance="standard">
+                <mat-label class="signup__label">Пароль</mat-label>
+                <input
+                  class="message-input form-control"
+                  matInput
+                  type="password"
+                  formControlName="password"
+                  name="password"
+                  minlength="5"
+                  maxlength="30"
+                  required
+                />
+                <mat-error *ngIf="form.get('password')?.hasError('whitespace')">
+                  <span>Обязательное поле</span>
+                </mat-error>
+                <mat-error *ngIf="form.get('password')?.errors?.min">
+                  Пароль должно быть больше или равен
+                  {{form.get('password').errors?.min.min}}
+                </mat-error>
+              </mat-form-field>
+
+              <input type="file" formControlName="photo" (change)="selectFile($event)">
+
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+              <button  [disabled]="!form.valid"
+                       (click)="handleFormSubmit(form.value)"
+                       class="signup__btn-create btn btn--type-02">Зарегистрироваться</button>
+            </mat-card-actions>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </main>
+</div>

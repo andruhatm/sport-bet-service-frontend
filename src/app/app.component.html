@@ -1,0 +1,38 @@
+<div *ngIf="router.url !== '/auth/signup' && router.url !== '/auth/login'">
+  <header>
+    <div class="header js-header js-dropdown">
+      <div class="container">
+        <div class="header__logo">
+          <img class="img-fluid" src="../fonts/icons/main/smart-event-logo.png" alt="logo" />
+          <a [routerLink]="['/feed']" class="header__logo-btn" data-dropdown-btn="logo">Sport Bets</a>
+        </div>
+        <ng-container *ngIf="this.user.authenticated; else anonimSearch">
+          <div class="header__search"></div>
+        </ng-container>
+        <ng-template #anonimSearch>
+          <div class="header__search__anonim"></div>
+        </ng-template>
+        <div *ngIf="this.user.authenticated" class="header__menu">
+          <div routerLink="feed/bets" class="header__menu-btn" data-dropdown-btn="menu">My Bets<i></i></div>
+        </div>
+        <div class="header__notification">
+          <app-user-menu></app-user-menu>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<router-outlet></router-outlet>
+
+<div *ngIf="router.url !== '/auth/signup' && router.url !== '/auth/login'">
+  <footer>
+    <div class="footer js-dropdown">
+      <div class="container">
+        <div class="footer__bline m--center">
+          <div class="footer__copyright m--center">sport-bets&copy; 2021</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

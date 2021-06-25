@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="create">
+      <div class="create__head">
+        <div class="create__title"><img src="fonts/icons/main/New_Topic.svg" alt="New topic" />Личная информация</div>
+      </div>
+
+      <form [formGroup]="formPersonalCabinet">
+
+        <div class="row g-3">
+
+          <div class="col-md-6 order-md-last">
+            <p>
+              <img [src]="getImg()"
+                   height="250"
+                   width="250"
+                   class="round" alt="user photo">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <div class="col">
+              <div class="create__section">
+                <mat-form-field class="example-full-width" appearance="standard">
+                  <mat-label>Username</mat-label>
+                  <input
+                    value="{{this.user.username}}"
+                    class="inputField"
+                    matInput
+                    type="text"
+                    formControlName="username"
+                    name="username"
+                    disabled="disabled"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="create__section">
+                <mat-form-field class="example-full-width" appearance="standard">
+                  <mat-label>Balance</mat-label>
+                  <input
+                    class="inputField"
+                    matInput
+                    type="text"
+                    formControlName="balance"
+                    name="balance"
+                    disabled="disabled"
+                  />
+                </mat-form-field>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+</div>
